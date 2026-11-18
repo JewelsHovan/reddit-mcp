@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "reddit-mcp"
+version = "0.1.0"
+description = "Local read-only Reddit MCP server for agents, backed by a real Chrome browser session."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "JewelsHovan" }]
+keywords = ["reddit", "mcp", "agents", "playwright"]
+requires-python = ">=3.11"
+dependencies = [
+  "mcp[cli]>=1.2.0,<2",
+  "playwright>=1.40",
+  "pydantic>=2.8",
+  "beautifulsoup4>=4.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/JewelsHovan/reddit-mcp"
+Repository = "https://github.com/JewelsHovan/reddit-mcp"
+Issues = "https://github.com/JewelsHovan/reddit-mcp/issues"
+
+[project.scripts]
+reddit-mcp = "reddit_mcp.server:main"
+reddit-mcp-smoke = "reddit_mcp.live_check:main"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "ruff>=0.6",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reddit_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "LICENSE", "SECURITY.md", "CONTRIBUTING.md", "CHANGELOG.md", "pyproject.toml", "uv.lock"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-q --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

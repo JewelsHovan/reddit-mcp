@@ -1,0 +1,26 @@
+name: Bug report
+description: Report an installation, parsing, or MCP tool problem.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach browser profiles, cookies, tokens, environment dumps, or private community content. For security issues, see SECURITY.md instead.
+  - type: input
+    id: platform
+    attributes:
+      label: Environment
+      description: OS, Python version, Chrome version, MCP client, and repository commit.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Tool name and redacted arguments, expected result, and actual result. Public post links are optional; prefer an invented HTML fixture when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error or incorrect fields
+      description: Paste only the relevant fields or error message, with secrets removed. If a block occurs, stop rather than retrying.
